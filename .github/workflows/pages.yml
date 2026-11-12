@@ -1,0 +1,51 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Fetch site content
+        run: |
+          mkdir -p site
+          for i in 1 2 3 4 5; do
+            curl -fsSL --max-time 60 "https://aka.doubaocdn.com/s/YyWJduxR5R" -o site/index.html && break
+            echo "retry $i"; sleep 10
+          done
+          echo "size: $(wc -c < site/index.html) bytes"
+          MD5=$(md5sum site/index.html | cut -d' ' -f1)
+          echo "md5: $MD5"
+          echo "$MD5" | grep -q 983097c5560a9dc6081fb19ab76678c2
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./site
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
