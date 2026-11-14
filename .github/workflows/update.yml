@@ -1,0 +1,27 @@
+name: Update site page
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fetch and commit page
+        run: |
+          for i in 1 2 3 4 5; do
+            curl -fsSL --max-time 60 "https://aka.doubaocdn.com/s/usfwMO8Fht" -o index.html && break
+            echo "retry $i"; sleep 10
+          done
+          MD5=$(md5sum index.html | cut -d' ' -f1)
+          echo "md5=$MD5 size=$(wc -c < index.html)"
+          echo "$MD5" | grep -q 192f25e460f67324d25c9ff5d9175375
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git commit -m "Update page: 纯白版式 / 拆补法 / 时旬空亡" || echo "no change"
+          git push
