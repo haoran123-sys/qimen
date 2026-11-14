@@ -55,32 +55,36 @@ button:active{transform:translateY(1px)}
 .palace{
   font-family:"Songti SC","STSong","SimSun",serif;
   border-right:1px solid var(--line2);border-bottom:1px solid var(--line2);
-  padding:9px 8px 9px;display:flex;flex-direction:column;gap:5px;min-height:152px;min-width:0;position:relative;
+  position:relative;min-height:132px;min-width:0;
 }
 .palace.center{background:var(--soft)}
-.palace.is-kong{background:#FBFBFB}
-.palace.is-kong .gname{text-decoration:underline;text-underline-offset:3px}
-.ph{display:flex;justify-content:space-between;align-items:baseline;gap:4px;padding-bottom:4px;border-bottom:1px solid var(--line)}
-.ph .gname{font-size:11px;color:var(--ink2);letter-spacing:1px;white-space:nowrap}
-.ph .gdir{font-size:10px;color:var(--muted);letter-spacing:1px;white-space:nowrap}
-.pr{display:flex;justify-content:space-between;align-items:baseline;gap:4px;min-width:0}
-.t-shen{font-size:15px;font-weight:600;letter-spacing:.5px;white-space:nowrap}
-.t-star{font-size:14px;font-weight:600;color:var(--ink2);letter-spacing:.5px;white-space:nowrap}
-.t-door{font-size:14px;font-weight:600;letter-spacing:.5px;white-space:nowrap}
-.t-di{font-size:11px;color:var(--muted);letter-spacing:.5px;white-space:nowrap}
-.gan-t{font-family:"Songti SC","STSong","SimSun",serif;font-size:21px;font-weight:700;line-height:1.15;color:var(--ink)}
-.gan-d{font-family:"Songti SC","STSong","SimSun",serif;font-size:19px;font-weight:600;line-height:1.15;color:#9A9A9A}
-.geju{font-size:10.5px;color:#A0A0A0;letter-spacing:.3px;line-height:1.35;word-break:break-all}
-.tag{font-size:10px;letter-spacing:1px;color:var(--muted);border:1px solid var(--line2);border-radius:2px;padding:0 3px;line-height:1.35}
+.palace.is-kong{background:#FAFAFA}
+.palace.is-kong .gname{color:#6F6F6F;text-decoration:underline;text-underline-offset:2px}
+.phead{position:absolute;top:3px;left:7px;display:flex;align-items:center;gap:4px;max-width:calc(100% - 14px)}
+.gname{font-size:9.5px;color:#B8B8B8;letter-spacing:.5px;white-space:nowrap;line-height:1.3}
+/* 神 / 星 / 天盘干 同一行，基线对齐，星严格居中 */
+.top{position:absolute;top:19px;left:7px;right:7px;display:flex;align-items:baseline}
+.t-shen{flex:0 0 34px;font-size:14.5px;font-weight:600;white-space:nowrap;line-height:1.25}
+.t-star{flex:1 1 auto;text-align:center;font-size:16px;font-weight:600;color:var(--ink2);line-height:1.25}
+.t-di{position:absolute;bottom:21px;left:7px;font-size:10.5px;color:var(--muted);white-space:nowrap;line-height:1.3}
+.t-door{position:absolute;top:50%;left:0;right:0;transform:translateY(-50%);text-align:center;font-size:27px;font-weight:700;line-height:1.1;letter-spacing:1px}
+.gan-t{flex:0 0 34px;text-align:right;font-family:"Songti SC","STSong","SimSun",serif;font-size:19px;font-weight:700;line-height:1.15;color:var(--ink)}
+.gan-d{position:absolute;bottom:19.5px;right:7px;font-family:"Songti SC","STSong","SimSun",serif;font-size:17px;font-weight:600;line-height:1.2;color:#9A9A9A}
+.geju{position:absolute;bottom:4px;left:2px;right:2px;text-align:center;font-size:9.5px;color:#B4B4B4;letter-spacing:.3px;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tag{font-size:9.5px;letter-spacing:0;color:var(--muted);border:1px solid var(--line2);border-radius:2px;padding:0 2px;line-height:1.3}
 .tag.kong{color:#000;border-color:#000;font-weight:600;font-family:"PingFang SC","Hiragino Sans GB",sans-serif}
-
-.tags{display:flex;gap:3px;align-items:center;flex:0 0 auto}
+/* 四类要素着色 */
+.zf{color:#B3261E}
+.zs{color:#B3261E}
+.rigan{color:#1D4E89}
+.shigan{color:#A35832}
 
 /* ===== 图例 / 页脚 ===== */
 .legend{display:flex;flex-wrap:wrap;gap:8px 16px;margin-top:16px;font-size:11.5px;color:var(--ink2)}
 .lg{display:flex;align-items:center;gap:6px}
 .dot{width:8px;height:8px;border-radius:50%;flex:0 0 auto}
 .dot.ring{border-radius:2px;border:1px solid #000;background:#fff}
+.legend.lc{margin-top:8px}
 .foot{margin-top:20px;padding-top:14px;border-top:1px solid var(--line);text-align:center;font-size:11px;color:var(--muted);line-height:2}
 
 .toast{
@@ -96,19 +100,23 @@ button:active{transform:translateY(1px)}
   .mrow.full{grid-column:1 / -1;border-right:none;padding-right:0}
   h1{font-size:26px}
   .wrap{padding:32px 18px 0}
-  .palace{padding:12px 11px;min-height:168px}
-  .t-shen{font-size:16px}
-  .t-star,.t-door{font-size:15px}
-  .gan-t{font-size:24px}
-  .gan-d{font-size:21px}
-  .ph .gname{font-size:12px}
+  .palace{min-height:156px}
+  .t-shen{font-size:15.5px}
+  .top .t-shen,.top .gan-t{flex-basis:40px}
+  .t-door{font-size:30px}
+  .gan-t{font-size:21px}
+  .gan-d{font-size:19px}
+  .gname{font-size:10px}
+  .geju{font-size:10.5px}
 }
 @media (max-width:360px){
-  .t-shen{font-size:13.5px}
-  .t-star,.t-door{font-size:12.5px}
-  .gan-t{font-size:19px}
-  .gan-d{font-size:17px}
-  .geju{font-size:9.5px}
+  .palace{min-height:120px}
+  .t-shen{font-size:13px}
+  .t-star{font-size:13.5px}
+  .t-door{font-size:24px}
+  .gan-t{font-size:17px}
+  .gan-d{font-size:15px}
+  .geju{font-size:9px}
   h1{font-size:20px;letter-spacing:3px}
 }
 </style>
@@ -142,11 +150,18 @@ button:active{transform:translateY(1px)}
 
     <div class="legend">
       <div class="lg"><span class="dot" style="background:#161616"></span>九神</div>
-      <div class="lg"><span class="dot" style="background:#6E6E6E"></span>九星</div>
-      <div class="lg"><span class="dot" style="background:#161616"></span>八门</div>
+      <div class="lg"><span class="dot" style="background:#6E6E6E"></span>九星（单字，天蓬→蓬）</div>
+      <div class="lg"><span class="dot" style="background:#161616"></span>八门（单字，休门→休）</div>
       <div class="lg"><span class="dot" style="background:#161616;border-radius:0"></span>天盘干</div>
       <div class="lg"><span class="dot" style="background:#9A9A9A;border-radius:0"></span>地盘干</div>
       <div class="lg"><span class="dot ring"></span>空＝旬空（按时干取旬）</div>
+      <div class="lg"><span class="dot" style="background:#fff;border:1px solid #CFCFCF"></span>马＝驿马</div>
+    </div>
+    <div class="legend lc">
+      <div class="lg"><span class="dot" style="background:#B3261E"></span>值符星 / 值使门</div>
+      <div class="lg"><span class="dot" style="background:#1D4E89"></span>日干</div>
+      <div class="lg"><span class="dot" style="background:#A35832"></span>时干</div>
+      <div class="lg">格局只书称呼</div>
     </div>
   </div>
 
@@ -440,6 +455,13 @@ function render(t){
     mrow("空亡", ch.xunName + "旬（" + ch.dunGan + "）· 空亡 <em>" + ch.xunKong + "</em>" + (ch.kongPalaces.length ? " → " + ch.kongPalaces.map(function(pp){ return PALACE_NAME[pp] + pp + "宫"; }).join("、") : ""), "full") +
     mrow("值符", ch.zhiFuStar + " · 值使 " + ch.zhiShiDoor);
 
+  var RIGAN = ch.siZhu[2].charAt(0), SHIGAN = ch.siZhu[3].charAt(0);
+  var ZFSTAR = ch.zhiFuStar.charAt(1), ZSDOOR = ch.zhiShiDoor.charAt(0);
+  function ganCls(g){
+    if(g === SHIGAN) return " shigan";
+    if(g === RIGAN) return " rigan";
+    return "";
+  }
   var cells = [];
   for(var i=0;i<BOARD_ORDER.length;i++){
     var p = BOARD_ORDER[i];
@@ -447,13 +469,19 @@ function render(t){
     var tags = "";
     if(pc.ma)   tags += '<span class="tag">马</span>';
     if(pc.kong) tags += '<span class="tag kong">空</span>';
+    var starShort = pc.star.charAt(1), doorShort = pc.door.charAt(0);
     cells.push(
       '<div class="palace' + (p === 5 ? " center" : "") + (pc.kong ? " is-kong" : "") + '">' +
-        '<div class="ph"><span class="gname">' + pc.name + p + '</span><span class="gdir">' + pc.dir + '</span></div>' +
-        '<div class="pr"><span class="t-shen">' + pc.tianShen + '</span><div class="tags">' + tags + '</div></div>' +
-        '<div class="pr"><span class="t-star">' + pc.star + '</span><span class="gan-t">' + pc.tianGan + '</span></div>' +
-        '<div class="pr"><span class="t-di">' + pc.diShen + '</span><span class="t-door">' + pc.door + '</span><span class="gan-d">' + pc.diGan + '</span></div>' +
-        '<div class="geju">' + pc.gejuKey + (pc.gejuName ? " · " + pc.gejuName : "") + '</div>' +
+        '<div class="phead"><span class="gname">' + pc.name + p + '</span>' + tags + '</div>' +
+        '<div class="top">' +
+          '<span class="t-shen">' + pc.tianShen + '</span>' +
+          '<span class="t-star' + (starShort === ZFSTAR ? " zf" : "") + '">' + starShort + '</span>' +
+          '<span class="gan-t' + ganCls(pc.tianGan) + '">' + pc.tianGan + '</span>' +
+        '</div>' +
+        '<span class="t-door' + (doorShort === ZSDOOR ? " zs" : "") + '">' + doorShort + '</span>' +
+        '<span class="t-di">' + pc.diShen + '</span>' +
+        '<span class="gan-d' + ganCls(pc.diGan) + '">' + pc.diGan + '</span>' +
+        '<div class="geju">' + (pc.gejuName || pc.gejuKey) + '</div>' +
       '</div>'
     );
   }
